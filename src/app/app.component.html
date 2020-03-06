@@ -1,52 +1,72 @@
 <header>
-  <h1>Todo List</h1>
+  <h1 class="title has-text-centered">Todo List</h1>
 </header>
 
 <main>
-  <section>
-    <h2>Add a Todo</h2>
+  <section class="section">
+    <h2 class="subtitle has-text-centered">Add a Todo</h2>
 
     <form (submit)="onSubmit($event)">
-      <div>
-        <label for="text">
+      <div class="field">
+        <div class="control">
           <input
             type="text"
+            class="input"
             name="text"
             placeholder="Enter text"
             [value]="text"
             (change)="text = $event.target.value"
           />
-        </label>
+        </div>
+        <p *ngIf="textError" class="help is-danger has-text-centered">
+          {{ textError }}
+        </p>
       </div>
 
-      <div *ngIf="textError">
-        <label>{{ textError }}</label>
+      <div class="field">
+        <div class="control has-text-centered">
+          <label class="checkbox" for="completed">
+            Completed
+            <input
+              type="checkbox"
+              name="completed"
+              [checked]="completed"
+              (change)="toggleCompleted()"
+            />
+          </label>
+        </div>
       </div>
 
-      <div>
-        <label for="completed">Completed</label>
-        <input
-          type="checkbox"
-          name="completed"
-          [checked]="completed"
-          (change)="toggleCompleted()"
-        />
-      </div>
-
-      <div>
-        <button type="submit">Submit</button>
+      <div class="field has-text-centered">
+        <button type="submit" class="button is-success is-small">
+          Submit
+        </button>
       </div>
     </form>
   </section>
 
-  <section>
-    <h2>Todos</h2>
+  <section class="section has-text-centered">
+    <div class="container">
+      <h2 class="title">Todos</h2>
 
-    <ul>
-      <li *ngFor="let todo of todos">
-        <p>{{ todo.text }}</p>
-        <input type="checkbox" [checked]="todo.completed" />
-      </li>
-    </ul>
+      <ul class="list">
+        <li class="list-item" *ngFor="let todo of todos">
+          <h3 class="subtitle">{{ todo.text }}</h3>
+          <div class="options">
+            <input
+              type="checkbox"
+              [checked]="todo.completed"
+              (click)="toggleTodo(todo.id)"
+            />
+            <button
+              class="button is-small is-danger"
+              (click)="deleteTodo(todo.id)"
+            >
+              Delete me
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
   </section>
 </main>

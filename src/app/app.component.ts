@@ -13,8 +13,16 @@ class Todo {
     return this._text;
   }
 
+  public set text(text: string) {
+    this._text = text;
+  }
+
   public get completed(): boolean {
     return this._completed;
+  }
+
+  public set completed(completed: boolean) {
+    this._completed = completed;
   }
 
   public get id(): number {
@@ -37,7 +45,7 @@ export class AppComponent {
   private _completed = false;
   private _textError = "";
 
-  public get todos() {
+  public get todos(): Todo[] {
     return this._todos;
   }
 
@@ -45,7 +53,20 @@ export class AppComponent {
     this._todos.push(todo);
   }
 
-  public get text() {
+  public toggleTodo(todoId: number): void {
+    const todo: Todo | undefined = this.todos.find(
+      (t: Todo) => t.id === todoId
+    );
+    if (todo) {
+      todo.completed = !todo.completed;
+    }
+  }
+
+  public deleteTodo(todoId: number): void {
+    this._todos = this.todos.filter((t: Todo) => t.id !== todoId);
+  }
+
+  public get text(): string {
     return this._text;
   }
 
@@ -53,7 +74,7 @@ export class AppComponent {
     this._text = text;
   }
 
-  public get completed() {
+  public get completed(): boolean {
     return this._completed;
   }
 
@@ -65,7 +86,7 @@ export class AppComponent {
     this.completed = !this.completed;
   }
 
-  public get textError() {
+  public get textError(): string {
     return this._textError;
   }
 
