@@ -41,16 +41,18 @@ export class AppComponent {
     new Todo("Understand TS"),
   ];
 
-  private _text = "";
-  private _completed = false;
-  private _textError = "";
-
   public get todos(): Todo[] {
     return this._todos;
   }
 
   private addTodo(todo: Todo): void {
     this._todos.push(todo);
+  }
+
+  public createTodo(text: string, completed: boolean): void {
+    if (text.length) {
+      this.addTodo(new Todo(text, completed));
+    }
   }
 
   public toggleTodo(todoId: number): void {
@@ -64,46 +66,5 @@ export class AppComponent {
 
   public deleteTodo(todoId: number): void {
     this._todos = this.todos.filter((t: Todo) => t.id !== todoId);
-  }
-
-  public get text(): string {
-    return this._text;
-  }
-
-  public set text(text: string) {
-    this._text = text;
-  }
-
-  public get completed(): boolean {
-    return this._completed;
-  }
-
-  public set completed(completed: boolean) {
-    this._completed = completed;
-  }
-
-  public toggleCompleted(): void {
-    this.completed = !this.completed;
-  }
-
-  public get textError(): string {
-    return this._textError;
-  }
-
-  public set textError(textError: string) {
-    this._textError = textError;
-  }
-
-  public onSubmit(ev: Event): void {
-    ev.preventDefault();
-
-    if (this.text.length === 0) {
-      this.textError = "You must add text.";
-    } else {
-      this.addTodo(new Todo(this.text, this.completed));
-      this.text = "";
-      this.completed = false;
-      this.textError = "";
-    }
   }
 }

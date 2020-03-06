@@ -1,0 +1,22 @@
+form {
+  width: 25%;
+  margin: auto;
+}
+
+@media (max-width: 1250px) {
+  form {
+    width: 35%;
+  }
+}
+
+@media (max-width: 900px) {
+  form {
+    width: 45%;
+  }
+}
+
+@media (max-width: 500px) {
+  form {
+    width: 85%;
+  }
+}

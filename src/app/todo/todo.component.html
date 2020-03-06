@@ -1,0 +1,9 @@
+<li class="list-item">
+  <h3 class="subtitle">{{ text }}</h3>
+  <div class="options">
+    <input type="checkbox" [checked]="completed" (click)="toggleTodo(id)" />
+    <button class="button is-small is-danger" (click)="deleteTodo(id)">
+      Delete me
+    </button>
+  </div>
+</li>
